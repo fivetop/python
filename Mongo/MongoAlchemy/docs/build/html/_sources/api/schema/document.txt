@@ -1,0 +1,19 @@
+Documents and Indexes
+=======================================
+
+.. automodule:: mongoalchemy.document
+
+
+:class:`Document`
+----------------------------------------------------------
+
+.. autoclass:: mongoalchemy.document.Document
+   :members:
+   :undoc-members:
+
+:class:`Index`
+----------------------------------------------------------
+.. autoclass:: mongoalchemy.document.Index
+   :members:
+   :undoc-members:
+

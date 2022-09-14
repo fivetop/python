@@ -1,0 +1,18 @@
+language: python
+python:
+  - "2.7"
+  - "2.6"
+env:
+  - FLASK=0.10.1
+  - FLASK=0.9
+  - FLASK=0.8.1
+services: mongodb
+install:
+  - pip install coverage --use-mirrors
+  - pip install flask==$FLASK --use-mirrors
+  - pip install -e . --use-mirrors
+script:
+  - python tests/run.py
+notifications:
+  email:
+    - christoph.heer@googlemail.com

@@ -1,0 +1,23 @@
+
+Update Expressions
+==================================
+
+Updates are done by calling any of the update operations on a query object
+
+.. autoclass:: mongoalchemy.update_expression.UpdateExpression
+
+Remove Queries
+==================================
+
+Remove queries are executed with the ``remove_query`` method on a session.  
+They have the same filtering methods as querying.
+
+.. autoclass:: mongoalchemy.query.RemoveQuery
+
+
+Find and Modify
+====================================
+
+Find and modify is done by calling find_and_modify on a query object
+
+.. autoclass:: mongoalchemy.update_expression.FindAndModifyExpression

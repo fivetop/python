@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Details of {{ nn.name }} - version {{ ga.name }} - network number {{ network.name }}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="mMaxy">
+
+    <!-- Bootstrap core CSS -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap theme -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">
+    <style type="text/css">
+        body {
+            padding-top: 70px;
+            padding-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../#">AI-builder</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="../../#">Home</a></li>
+                <li><a href="../../#about">About</a></li>
+                <li><a href="../../#contact">Contact</a></li>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</div>
+
+<div class="container theme-showcase">
+    <h1>
+        {{ nn.name }} - version {{ ga.name }}, specimen {{ network.name }}
+    </h1>
+
+    <p><a href="{% url "details_ga" nn.id ga.name %}" class="btn btn-success">Back</a></p>
+
+    <p class="lead">
+        Population number: {{ network.population }}
+        <br/>
+        Best Run:
+        {% ifnotequal network.best_run 101.0 %} {{ network.best_run }} {% endifnotequal %}
+        {% ifequal n.best_run 101.0 %} -1 {% endifequal %}
+    </p>
+
+    <p><a href="{{ network.getMatrixURL }}" class="btn btn-success">Get Matrix</a></p>
+</div>
+
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://mbostock.github.com/d3/d3.js?2.6.0"></script>
+<script type="text/javascript" src="http://mbostock.github.com/d3/d3.layout.js?2.6.0"></script>
+<script type="text/javascript" src="http://mbostock.github.com/d3/d3.geom.js?2.6.0"></script>
+<script type="text/javascript" charset="utf-8">
+    var w = 800, h = 400;
+
+    var labelDistance = 0;
+
+    var vis = d3.select("div.theme-showcase").append("svg:svg").attr("width", w).attr("height", h);
+
+    var nodes = [];
+    var labelAnchors = [];
+    var labelAnchorLinks = [];
+    var links = [];
+    var func = ['GaussianLayer', 'SigmoidLayer', 'SoftmaxLayer', 'LinearLayer', 'TanhLayer'];
+    var labels = {{ network.getFunc }};
+    var matrix =
+    {{ network.getMat }}
+
+    for (var i = 0; i <  {{ nn.numberOfNeurons }}; i++) {
+        var node = {
+            label: '' + func[labels[i]] + i
+        };
+        nodes.push(node);
+        labelAnchors.push({
+            node: node
+        });
+        labelAnchors.push({
+            node: node
+        });
+    }
+    ;
+
+    for (var i = 0; i < nodes.length; i++) {
+        for (var j = 0; j < i; j++) {
+            if (matrix[i][j] == 1)
+                links.push({
+                    source: i,
+                    target: j,
+                    weight: Math.random()
+                });
+        }
+        labelAnchorLinks.push({
+            source: i * 2,
+            target: i * 2 + 1,
+            weight: 1
+        });
+    }
+    ;
+
+    var force = d3.layout.force().size([w, h]).nodes(nodes).links(links).gravity(1).linkDistance(50).charge(-3000).linkStrength(function (x) {
+        return x.weight * 10
+    });
+
+
+    force.start();
+
+    var force2 = d3.layout.force().nodes(labelAnchors).links(labelAnchorLinks).gravity(0).linkDistance(0).linkStrength(8).charge(-100).size([w, h]);
+    force2.start();
+
+    var link = vis.selectAll("line.link").data(links).enter().append("svg:line").attr("class", "link").style("stroke", "#CCC");
+
+    var node = vis.selectAll("g.node").data(force.nodes()).enter().append("svg:g").attr("class", "node");
+    node.append("svg:circle").attr("r", 5).style("fill", "#555").style("stroke", "#FFF").style("stroke-width", 3);
+    node.call(force.drag);
+
+
+    var anchorLink = vis.selectAll("line.anchorLink").data(labelAnchorLinks)//.enter().append("svg:line").attr("class", "anchorLink").style("stroke", "#999");
+
+    var anchorNode = vis.selectAll("g.anchorNode").data(force2.nodes()).enter().append("svg:g").attr("class", "anchorNode");
+    anchorNode.append("svg:circle").attr("r", 0).style("fill", "#FFF");
+    anchorNode.append("svg:text").text(function (d, i) {
+        return i % 2 == 0 ? "" : d.node.label
+    }).style("fill", "#555").style("font-family", "Arial").style("font-size", 12);
+
+    var updateLink = function () {
+        this.attr("x1",function (d) {
+            return d.source.x;
+        }).attr("y1",function (d) {
+                    return d.source.y;
+                }).attr("x2",function (d) {
+                    return d.target.x;
+                }).attr("y2", function (d) {
+                    return d.target.y;
+                });
+
+    }
+
+    var updateNode = function () {
+        this.attr("transform", function (d) {
+            return "translate(" + d.x + "," + d.y + ")";
+        });
+
+    }
+
+
+    force.on("tick", function () {
+
+        force2.start();
+
+        node.call(updateNode);
+
+        anchorNode.each(function (d, i) {
+            if (i % 2 == 0) {
+                d.x = d.node.x;
+                d.y = d.node.y;
+            } else {
+                var b = this.childNodes[1].getBBox();
+
+                var diffX = d.x - d.node.x;
+                var diffY = d.y - d.node.y;
+
+                var dist = Math.sqrt(diffX * diffX + diffY * diffY);
+
+                var shiftX = b.width * (diffX - dist) / (dist * 2);
+                shiftX = Math.max(-b.width, Math.min(0, shiftX));
+                var shiftY = 5;
+                this.childNodes[1].setAttribute("transform", "translate(" + shiftX + "," + shiftY + ")");
+            }
+        });
+
+
+        anchorNode.call(updateNode);
+
+        link.call(updateLink);
+        anchorLink.call(updateLink);
+
+    });
+
+</script>
+</body>
+</html>

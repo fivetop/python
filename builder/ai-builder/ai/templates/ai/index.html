@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Modeling of your neural network</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="mMaxy">
+
+    <!-- Bootstrap core CSS -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap theme -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">
+    <style type="text/css">
+        body {
+            padding-top: 70px;
+            padding-bottom: 30px;
+        }
+
+        .theme-dropdown .dropdown-menu {
+            display: block;
+            position: static;
+            margin-bottom: 20px;
+        }
+
+        .theme-showcase > p > .btn {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">AI-builder</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</div>
+
+<div class="container theme-showcase">
+    <div class="jumbotron">
+        <h1>AI-Builder</h1>
+
+        <p>Experimental research program of neural network-based analytical and prediction models</p>
+
+        <p><a href="{% url 'ai.views.upload' %}" class="btn btn-primary btn-lg">I've got something to build</a></p>
+    </div>
+
+    <div class="page-header">
+        <h1 id="about">
+            About this cite
+        </h1>
+
+        <p class="lead">
+            The program by the genetic algorithm creates and teaches several generations of neural networks with
+            different parameters, choosing the best ones for the criterion of the minimum error detection test set.
+        </p>
+
+        <p>
+            As a result, the program built a neural network that's better tuned to solvable problem than a network with
+            an empirically chosen parameters.
+        </p>
+    </div>
+
+    <div class="page-header">
+        <h1 id="neurals">
+            Already created Neurals Networks
+        </h1>
+    </div>
+    {% for n in nw %}
+        <div class="page-header">
+            <h3>
+                {{ n.name }}
+            </h3>
+
+            <div>
+
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="{{ n.getCompletion }}" aria-valuemin="0"
+                         aria-valuemax="100" style="width: {{ n.getCompletion }}%;">
+                                <span class="sr-only">
+                                    {{ n.getCompletion }}%
+                                </span>
+                    </div>
+                </div>
+                <p><a href="{{ n.getURL }}" class="btn btn-primary">See details</a></p>
+            </div>
+        </div>
+    {% endfor %}
+
+    <div class="page-header">
+        <h1 id="contact">
+            Contacts
+        </h1>
+
+        <p class="lead">
+            Created by <a href="http://about.me/art.olkov">Artem Olkov</a>. <br/>
+            By following this link you can find my social networks, email me and get any contact of me you ever can
+            imagine
+        </p>
+
+        <p><a href="https://github.com/mMaxy/ai-builder" class="btn btn-primary">Get sourcecode from GitHub</a></p>
+    </div>
+</div>
+
+</body>
+</html>

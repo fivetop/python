@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta http-equiv="refresh" content="5">
+</head>
+<body>
+    <h1>해당 페이지는 5초마다 자동으로 새로고침(refresh)됩니다. 숫자를 10으로 바꾸면 10초마다 refresh 됩니다.</h1>
+    <div>
+        <p>연결이 성공되면 아래에 데이터가 뜰꺼야!</p>
+        <p>------------------------------------</p>
+        {% for i in data %}
+            <p>이름: {{i.name}}</p>
+            <p>내용: {{i.content}}</p>
+            <p>---------------</p>
+        {% endfor %}
+    </div>
+</body>
+</html>

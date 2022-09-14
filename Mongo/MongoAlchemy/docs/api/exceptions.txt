@@ -1,0 +1,31 @@
+Exceptions
+========================================================
+
+Field Exceptions
+--------------------------------
+
+.. autoexception:: mongoalchemy.exceptions.BadValueException
+
+.. autoexception:: mongoalchemy.exceptions.BadFieldSpecification
+
+
+Document Exceptions
+------------------------------------
+
+.. autoexception:: mongoalchemy.exceptions.DocumentException
+.. autoexception:: mongoalchemy.exceptions.MissingValueException
+.. autoexception:: mongoalchemy.exceptions.ExtraValueException
+.. autoexception:: mongoalchemy.exceptions.FieldNotRetrieved
+.. autoexception:: mongoalchemy.exceptions.InvalidConfigException
+
+Data Exceptions
+----------------------------------------
+
+.. autoexception:: mongoalchemy.exceptions.BadReferenceException
+.. autoexception:: mongoalchemy.exceptions.BadValueException
+
+Session Exceptions
+------------------------------------------
+
+.. autoexception:: mongoalchemy.exceptions.TransactionException
+.. autoexception:: mongoalchemy.exceptions.SessionCacheException

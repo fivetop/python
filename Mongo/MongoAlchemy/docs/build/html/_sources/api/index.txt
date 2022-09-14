@@ -1,0 +1,19 @@
+
+API documentation
+========================================
+
+Contents:
+
+.. toctree::
+   :maxdepth: 4
+
+   session   
+   schema/fields
+   schema/document
+   expressions/index
+   exceptions
+
+.. automodule:: mongoalchemy
+   :members:
+   :undoc-members:
+

@@ -1,0 +1,85 @@
+2020-07-14 16:41:56,466 - INFO - 
+Config:
+'add_train': False
+'batch_size': 64
+'continue_flag': ''
+'cur_time': '2020_07_14_16_41_56'
+'debug_mode': False
+'debug_num': 500
+'do_continue_train': False
+'do_figure_save': False
+'do_log_print_to_screen': True
+'do_log_save_to_file': True
+'do_predict': True
+'do_train': True
+'do_train_visualized': False
+'dropout_rate': 0.2
+'epoch': 20
+'feature_columns': [2, 3, 4, 5, 6, 7, 8]
+'figure_save_path': './figure/'
+'hidden_size': 128
+'input_size': 7
+'label_columns': [4, 5]
+'label_in_feature_index': [2, 3]
+'learning_rate': 0.001
+'log_save_path': './log/2020_07_14_16_41_56_pytorch/'
+'lstm_layers': 2
+'model_name': 'model_pytorch.pth'
+'model_postfix': {'pytorch': '.pth'
+'keras': '.h5'
+'tensorflow': '.ckpt'}
+'model_save_path': './checkpoint/pytorch/'
+'output_size': 2
+'patience': 5
+'predict_day': 1
+'random_seed': 42
+'shuffle_train_data': True
+'time_step': 20
+'train_data_path': './data/stock_data.csv'
+'train_data_rate': 0.95
+'use_cuda': False
+'used_frame': 'pytorch'
+'valid_data_rate': 0.15
+2020-07-14 16:41:56,492 - INFO - Epoch 0/20
+2020-07-14 16:42:00,124 - INFO - The train loss is 0.165542. The valid loss is 0.030520.
+2020-07-14 16:42:00,125 - INFO - Epoch 1/20
+2020-07-14 16:42:03,795 - INFO - The train loss is 0.019826. The valid loss is 0.011037.
+2020-07-14 16:42:03,796 - INFO - Epoch 2/20
+2020-07-14 16:42:07,420 - INFO - The train loss is 0.008467. The valid loss is 0.004149.
+2020-07-14 16:42:07,421 - INFO - Epoch 3/20
+2020-07-14 16:42:10,995 - INFO - The train loss is 0.004479. The valid loss is 0.001954.
+2020-07-14 16:42:10,997 - INFO - Epoch 4/20
+2020-07-14 16:42:14,565 - INFO - The train loss is 0.003064. The valid loss is 0.001349.
+2020-07-14 16:42:14,567 - INFO - Epoch 5/20
+2020-07-14 16:42:18,181 - INFO - The train loss is 0.002570. The valid loss is 0.001211.
+2020-07-14 16:42:18,183 - INFO - Epoch 6/20
+2020-07-14 16:42:21,780 - INFO - The train loss is 0.002219. The valid loss is 0.001021.
+2020-07-14 16:42:21,782 - INFO - Epoch 7/20
+2020-07-14 16:42:25,404 - INFO - The train loss is 0.002012. The valid loss is 0.000992.
+2020-07-14 16:42:25,406 - INFO - Epoch 8/20
+2020-07-14 16:42:29,048 - INFO - The train loss is 0.001879. The valid loss is 0.000908.
+2020-07-14 16:42:29,050 - INFO - Epoch 9/20
+2020-07-14 16:42:32,711 - INFO - The train loss is 0.001761. The valid loss is 0.000885.
+2020-07-14 16:42:32,712 - INFO - Epoch 10/20
+2020-07-14 16:42:36,390 - INFO - The train loss is 0.001636. The valid loss is 0.000880.
+2020-07-14 16:42:36,391 - INFO - Epoch 11/20
+2020-07-14 16:42:40,027 - INFO - The train loss is 0.001557. The valid loss is 0.000840.
+2020-07-14 16:42:40,029 - INFO - Epoch 12/20
+2020-07-14 16:42:43,658 - INFO - The train loss is 0.001664. The valid loss is 0.000863.
+2020-07-14 16:42:43,659 - INFO - Epoch 13/20
+2020-07-14 16:42:47,293 - INFO - The train loss is 0.001630. The valid loss is 0.000800.
+2020-07-14 16:42:47,295 - INFO - Epoch 14/20
+2020-07-14 16:42:50,922 - INFO - The train loss is 0.001518. The valid loss is 0.001009.
+2020-07-14 16:42:50,922 - INFO - Epoch 15/20
+2020-07-14 16:42:54,639 - INFO - The train loss is 0.001453. The valid loss is 0.000803.
+2020-07-14 16:42:54,639 - INFO - Epoch 16/20
+2020-07-14 16:42:58,320 - INFO - The train loss is 0.001446. The valid loss is 0.000778.
+2020-07-14 16:42:58,321 - INFO - Epoch 17/20
+2020-07-14 16:43:01,915 - INFO - The train loss is 0.001361. The valid loss is 0.000970.
+2020-07-14 16:43:01,915 - INFO - Epoch 18/20
+2020-07-14 16:43:05,495 - INFO - The train loss is 0.001546. The valid loss is 0.000933.
+2020-07-14 16:43:05,495 - INFO - Epoch 19/20
+2020-07-14 16:43:08,975 - INFO - The train loss is 0.001383. The valid loss is 0.000797.
+2020-07-14 16:43:09,033 - INFO - The mean squared error of stock ['low', 'high'] is [0.00643907 0.00490411]
+2020-07-14 16:43:09,092 - INFO - The predicted stock low for the next 1 day(s) is: 3394.795079770248
+2020-07-14 16:43:09,139 - INFO - The predicted stock high for the next 1 day(s) is: 3492.0398984455023
